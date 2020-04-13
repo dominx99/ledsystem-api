@@ -1,0 +1,56 @@
+version: "3"
+services:
+  php:
+    container_name: ledsystem-php
+    build:
+      context: ./.docker
+      dockerfile: ./.docker/php/php.dockerfile
+      args:
+        user: ${USER}
+        uuid: ${UID}
+        group: ${GROUP}
+        guid: ${GID}
+    environment:
+      - APPROOT=/application
+    image: ledsystem/php:latest
+    env_file: .env
+    working_dir: /application
+    depends_on:
+      - mysql
+      - redis
+    volumes:
+      - ./:/application
+      - ./.docker/php/settings.ini:/usr/local/etc/php/conf.d/settings.ini
+
+  nginx:
+    container_name: ledsystem-nginx
+    image: nginx
+    ports:
+      - "80:8000"
+    volumes:
+      - ./:/application
+      - ./.docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./.docker/nginx/timeout.conf:/etc/nginx/conf.d/timeout.conf
+    depends_on:
+      - php
+
+  mysql:
+    container_name: ledsystem-mysql
+    image: mysql
+    volumes:
+      - ledsystem_db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_DATABASE=ledsystem
+      - MYSQL_HOST=127.0.0.1
+    ports:
+      - "3306:3306"
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+
+  redis:
+    container_name: atrealty-redis
+    image: redis
+
+volumes:
+  ledsystem_db:
