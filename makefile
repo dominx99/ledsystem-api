@@ -1,6 +1,8 @@
 compose_file := "docker-compose.yml"
 php_service := "php"
 
+.PHONY: artisan
+
 up:
 	@docker-compose -f $(compose_file) up -d
 
@@ -32,3 +34,6 @@ ttc:
 
 ttcn:
 	@docker-compose -f $(compose_file) exec $(php_service) sh -c "composer test -- --coverage-html .coverage $(CMD)"
+
+artisan:
+	@docker-compose -f $(compose_file) exec $(php_service) sh -c "php artisan $(CMD)"
