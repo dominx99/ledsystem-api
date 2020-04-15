@@ -6,6 +6,7 @@ use App\Shared\Exceptions\SystemException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\JsonResponse;
 use Throwable;
+use App\Domain\Shared\Exceptions\SystemException;
 
 class Handler extends ExceptionHandler
 {
