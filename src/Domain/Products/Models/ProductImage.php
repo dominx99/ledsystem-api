@@ -8,5 +8,6 @@ final class ProductImage extends Model
 {
     protected $fillable = [
         'path',
+        'product_id',
     ];
 }

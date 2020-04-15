@@ -21,4 +21,9 @@ final class EloquentProductRepository implements ProductRepository
             ->select(['*', 'category_product.id as cp_id', 'products.id as id'])
             ->get();
     }
+
+    public function save(Product $product): void
+    {
+        $product->save();
+    }
 }
