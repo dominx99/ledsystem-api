@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Collection;
 use Ramsey\Uuid\Uuid;
 use App\Domain\Products\Events\ProductCreated;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 final class Product extends Model
 {
@@ -31,6 +32,11 @@ final class Product extends Model
     public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class);
+    }
+
+    public function images(): HasMany
+    {
+        return $this->hasMany(ProductImage::class);
     }
 
     public static function new(array $data): self
