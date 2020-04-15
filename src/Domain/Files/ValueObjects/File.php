@@ -10,7 +10,6 @@ use App\Domain\Files\Contracts\Uploadable;
 class File implements Uploadable
 {
     protected string $extension;
-    protected string $originalName;
     protected string $filename;
     protected string $content;
 
@@ -22,14 +21,13 @@ class File implements Uploadable
     {
         $file = new static();
 
-        $file->extension = $uploadedFile->getExtension();
-        $file->originalName = $uploadedFile->getClientOriginalName();
+        $file->extension = $uploadedFile->getClientOriginalExtension();
 
         if (($file->content = $uploadedFile->get()) === false) {
             throw new SystemException("Could not get file content");
         }
 
-        $file->filename = $file->originalName . '_' . Carbon::now()->getTimestamp() . '.' . $file->extension;
+        $file->filename = Carbon::now()->getTimestamp() . '.' . $file->extension;
 
         return $file;
     }
