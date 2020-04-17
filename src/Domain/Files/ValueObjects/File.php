@@ -2,10 +2,10 @@
 
 namespace App\Domain\Files\ValueObjects;
 
-use Carbon\Carbon;
 use Illuminate\Http\UploadedFile;
 use App\Domain\Shared\Exceptions\SystemException;
 use App\Domain\Files\Contracts\Uploadable;
+use Illuminate\Support\Str;
 
 class File implements Uploadable
 {
@@ -17,7 +17,7 @@ class File implements Uploadable
     {
     }
 
-    public static function fromUploadedFile(UploadedFile $uploadedFile)
+    public static function fromUploadedFile(UploadedFile $uploadedFile): self
     {
         $file = new static();
 
@@ -27,7 +27,7 @@ class File implements Uploadable
             throw new SystemException("Could not get file content");
         }
 
-        $file->filename = Carbon::now()->getTimestamp() . '.' . $file->extension;
+        $file->filename = uniqid((string) mt_rand(), true) . '.' . $file->extension;
 
         return $file;
     }

@@ -37,3 +37,6 @@ ttcn:
 
 artisan:
 	@docker-compose -f $(compose_file) exec $(php_service) sh -c "php artisan $(CMD)"
+
+p:
+	@docker-compose -f $(compose_file) exec $(php_service) sh -c "php $(CMD)"

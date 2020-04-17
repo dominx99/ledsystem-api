@@ -11,3 +11,4 @@ Route::get('/categories/by-parent-slug', FetchCategoriesByParentSlugAction::clas
 Route::get('/categories/{categorySlug}/products', FetchProductsByCategory::class);
 
 Route::post('/products', CreateProductAction::class);
+

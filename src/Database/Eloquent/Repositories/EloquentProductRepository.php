@@ -15,7 +15,7 @@ final class EloquentProductRepository implements ProductRepository
             throw new \Exception("Category not found");
         }
 
-        return Product::with(['unit', 'images'])
+        return Product::with(['unit', 'images.original', 'images.thumbnail', 'images.micro'])
             ->join('category_product', 'products.id', '=', 'category_product.product_id')
             ->where('category_product.category_id', $category->id)
             ->select(['*', 'category_product.id as cp_id', 'products.id as id'])

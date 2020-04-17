@@ -26,8 +26,8 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Installing extensions
 RUN docker-php-ext-install pdo_mysql zip exif pcntl bcmath opcache
-RUN docker-php-ext-configure gd --with-gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ --with-png-dir=/usr/include/
-RUN docker-php-ext-install gd
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install gd
 
 RUN pecl install xdebug; \
     docker-php-ext-enable xdebug
@@ -47,12 +47,6 @@ RUN curl -L https://cs.sensiolabs.org/download/php-cs-fixer-v2.phar -o php-cs-fi
 
 # Setting locales
 RUN echo en_US.UTF-8 UTF-8 > /etc/locale.gen && locale-gen
-
-# Allow container to write on host
-RUN groupadd -g ${guid} -o ${group} && \
-    useradd -r -u ${uuid} -g ${guid} -d /application -s /sbin/nologin ${user}
-
-USER ${user}
 
 # Changing Workdir
 WORKDIR /application

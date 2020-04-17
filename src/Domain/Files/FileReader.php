@@ -5,4 +5,5 @@ namespace App\Domain\Files;
 interface FileReader
 {
     public function filesFromDirectory(string $path): array;
+    public function directories(string $path): array;
 }

@@ -18,4 +18,9 @@ final class LeagueFileReader implements FileReader
     {
         return $this->storage->files($path);
     }
+
+    public function directories(string $path): array
+    {
+        return $this->storage->directories($path);
+    }
 }
