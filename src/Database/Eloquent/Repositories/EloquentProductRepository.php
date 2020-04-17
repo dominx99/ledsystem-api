@@ -6,6 +6,7 @@ use App\Domain\Products\Repositories\ProductRepository;
 use App\Domain\Categories\Models\Category;
 use Illuminate\Support\Collection;
 use App\Domain\Products\Models\Product;
+use App\Domain\Shared\Exceptions\BusinessException;
 
 final class EloquentProductRepository implements ProductRepository
 {
@@ -20,6 +21,19 @@ final class EloquentProductRepository implements ProductRepository
             ->where('category_product.category_id', $category->id)
             ->select(['*', 'category_product.id as cp_id', 'products.id as id'])
             ->get();
+    }
+
+    public function findBySlug(string $slug): Product
+    {
+        $product = Product::with(['unit', 'images.thumbnail', 'images.original', 'images.micro'])
+            ->where('slug', $slug)
+            ->first();
+
+        if (! $product) {
+            throw new BusinessException('Product not found.');
+        }
+
+        return $product;
     }
 
     public function save(Product $product): void

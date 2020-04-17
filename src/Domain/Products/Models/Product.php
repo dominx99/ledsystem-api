@@ -6,10 +6,10 @@ use App\Database\Eloquent\Model;
 use App\Domain\Categories\Models\Category;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Support\Collection;
 use Ramsey\Uuid\Uuid;
 use App\Domain\Products\Events\ProductCreated;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Str;
 
 final class Product extends Model
 {
@@ -19,6 +19,7 @@ final class Product extends Model
     protected $fillable = [
         'id',
         'name',
+        'slug',
         'status',
         'product_unit_id',
         'product_image_id',
@@ -46,6 +47,7 @@ final class Product extends Model
         $product = new static([
             'id'              => $data['id'],
             'name'            => $data['name'],
+            'slug'            => $data['slug'] ?? Str::slug($data['name'], '-'),
             'product_unit_id' => $productUnitId,
             'status'          => self::STATUS_NEW,
         ]);

@@ -16,6 +16,7 @@ class CreateProductsTable extends Migration
             $table->uuid('id')->primary();
             $table->uuid('product_unit_id');
             $table->string('name');
+            $table->string('slug');
             $table->string('status')->default(Product::STATUS_NEW);
             $table->timestamps();
         });
