@@ -7,6 +7,7 @@ use App\Domain\Products\Models\Product;
 
 interface ProductRepository
 {
+    public function findAll(): Collection;
     public function findBySlug(string $slug): Product;
     public function findAllByCategorySlug(string $categoryId): Collection;
 

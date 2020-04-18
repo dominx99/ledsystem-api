@@ -39,7 +39,6 @@ final class CreateProductAction
             throw $t;
         }
 
-
         return new JsonResponse(["status" => "success"]);
     }
 }

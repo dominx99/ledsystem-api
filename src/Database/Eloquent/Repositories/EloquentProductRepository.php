@@ -10,6 +10,13 @@ use App\Domain\Shared\Exceptions\BusinessException;
 
 final class EloquentProductRepository implements ProductRepository
 {
+    public function findAll(): Collection
+    {
+        return Product::with(['unit', 'images.original', 'images.thumbnail', 'images.micro'])
+            ->orderBy('created_at', 'desc')
+            ->get();
+    }
+
     public function findAllByCategorySlug(string $slug): Collection
     {
         if (! $category = Category::where('slug', $slug)->first()) {
