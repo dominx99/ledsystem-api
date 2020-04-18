@@ -3,7 +3,7 @@
 namespace App\Actions\Auth;
 
 use Illuminate\Http\JsonResponse;
-use App\Domain\Products\Requests\LoginRequest;
+use App\Domain\Auth\Requests\LoginRequest;
 use App\Domain\Auth\DTO\AuthResult;
 use App\Domain\Auth\Contracts\AuthGuardResolver;
 

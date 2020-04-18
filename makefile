@@ -6,7 +6,7 @@ php_service := "php"
 up:
 	@docker-compose -f $(compose_file) up -d
 
-composer:
+ccc:
 	@docker-compose -f $(compose_file) exec $(php_service) sh -c "composer $(CMD)"
 
 mysql:
