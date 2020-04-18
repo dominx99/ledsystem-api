@@ -4,14 +4,11 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * @return void
-     */
-    public function run()
+    public function run(): void
     {
         $this->call([
             CategorySeeder::class,
-            ProductSeeder::class,
+            UserSeeder::class,
         ]);
     }
 }

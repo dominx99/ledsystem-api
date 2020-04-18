@@ -2,6 +2,7 @@
 
 namespace App\Exception;
 
+use App\Domain\Shared\Exceptions\BusinessException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\JsonResponse;
 use Throwable;
@@ -53,7 +54,17 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $exception)
     {
         if ($exception instanceof SystemException) {
-            return new JsonResponse(["error" => "System exception"]);
+            return new JsonResponse([
+                'status' => 'fail',
+                "error"  => "System exception",
+            ], JsonResponse::HTTP_BAD_REQUEST);
+        }
+
+        if ($exception instanceof BusinessException) {
+            return new JsonResponse([
+                "status" => "fail",
+                "error"  => $exception->getMessage(),
+            ], JsonResponse::HTTP_BAD_REQUEST);
         }
 
         return parent::render($request, $exception);

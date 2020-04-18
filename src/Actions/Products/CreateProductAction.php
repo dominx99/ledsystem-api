@@ -19,7 +19,7 @@ final class CreateProductAction
         $this->dispatcher = $dispatcher;
     }
 
-    public function __invoke(CreateProductRequest $request)
+    public function __invoke(CreateProductRequest $request): JsonResponse
     {
         $productId = (string) Uuid::uuid4();
 

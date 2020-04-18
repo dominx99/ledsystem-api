@@ -11,6 +11,8 @@ use App\Database\Eloquent\Repositories\EloquentProductUnitRepository;
 use App\Domain\Products\Repositories\ProductImageRepository;
 use App\Domain\Products\Repositories\ProductImageFileRepository;
 use App\Database\Eloquent\Repositories\EloquentProductImageFileRepository;
+use App\Database\Eloquent\Users\Repositories\EloquentUserRepository;
+use App\Domain\Users\Repositories\UserRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -19,5 +21,6 @@ class RepositoryServiceProvider extends ServiceProvider
         ProductUnitRepository::class => EloquentProductUnitRepository::class,
         ProductImageRepository::class => EloquentProductImageRepository::class,
         ProductImageFileRepository::class => EloquentProductImageFileRepository::class,
+        UserRepository::class => EloquentUserRepository::class,
     ];
 }

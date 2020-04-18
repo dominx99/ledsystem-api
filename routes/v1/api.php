@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Route;
 use App\Actions\Categories\FetchCategoriesByParentSlugAction;
 use App\Actions\Products\CreateProductAction;
 use App\Actions\Products\FindProductBySlugAction;
+use App\Actions\Auth\LoginAction;
+
+Route::post('/auth/login', LoginAction::class);
 
 Route::get('/categories', FetchCategoriesAction::class);
 Route::get('/categories/by-parent-slug', FetchCategoriesByParentSlugAction::class);

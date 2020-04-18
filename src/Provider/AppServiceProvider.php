@@ -2,6 +2,8 @@
 
 namespace App\Provider;
 
+use App\Domain\Auth\Contracts\AuthGuardResolver as AuthGuardResolverContract;
+use App\Domain\Auth\Resolvers\AuthGuardResolver;
 use App\Domain\Files\FileReader;
 use App\Domain\Files\FileUploader;
 use App\Domain\Shared\Events\Dispatcher as EventsDispatcher;
@@ -17,24 +19,10 @@ class AppServiceProvider extends ServiceProvider
         Dispatcher::class => EventsDispatcher::class,
         FileUploader::class => LeagueFileUploader::class,
         FileReader::class => LeagueFileReader::class,
+        AuthGuardResolverContract::class => AuthGuardResolver::class,
     ];
 
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
-    public function register()
-    {
-        //
-    }
-
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
-    public function boot()
+    public function boot(): void
     {
         Schema::defaultStringLength(191);
     }
