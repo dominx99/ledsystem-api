@@ -7,6 +7,7 @@ use App\Domain\Categories\Models\Category;
 use Illuminate\Support\Collection;
 use App\Domain\Products\Models\Product;
 use App\Domain\Shared\Exceptions\BusinessException;
+use Illuminate\Support\Facades\DB;
 
 final class EloquentProductRepository implements ProductRepository
 {
@@ -41,6 +42,19 @@ final class EloquentProductRepository implements ProductRepository
         }
 
         return $product;
+    }
+
+    public function attachParameterValues(string $productId, array $parameterValueIds): void
+    {
+        $params = array_map(
+            fn($parameterValueId) => [
+                'product_id' => $productId,
+                'parameter_value_id' => $parameterValueId
+            ],
+            $parameterValueIds
+        );
+
+        DB::table('parameter_value_prouct')->insert($params);
     }
 
     public function save(Product $product): void

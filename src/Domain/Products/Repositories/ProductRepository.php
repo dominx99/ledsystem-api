@@ -12,4 +12,5 @@ interface ProductRepository
     public function findAllByCategorySlug(string $categoryId): Collection;
 
     public function save(Product $product): void;
+    public function attachParameterValues(string $productId, array $parameterValueIds): void;
 }

@@ -19,12 +19,20 @@ final class ProductUnit extends Model
 
     public static function new(array $data): self
     {
-        return new static([
+        $params = [
             'id'    => $data['id'],
             'type'  => $data['type'],
             'price' => $data['price'],
-            'base'  => $data['base'],
-            'step'  => $data['step'],
-        ]);
+        ];
+
+        if (isset($data['base'])) {
+            $params['base'] = $data['base'];
+        }
+
+        if (isset($data['step'])) {
+            $params['step'] = $data['step'];
+        }
+
+        return new static($params);
     }
 }

@@ -10,6 +10,7 @@ use Ramsey\Uuid\Uuid;
 use App\Domain\Products\Events\ProductCreated;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
+use App\Domain\Parameters\Models\ParameterName;
 
 final class Product extends Model
 {
@@ -57,5 +58,10 @@ final class Product extends Model
         ])));
 
         return $product;
+    }
+
+    public function parameters()
+    {
+        return $this->hasMany(ProductParameter::class);
     }
 }

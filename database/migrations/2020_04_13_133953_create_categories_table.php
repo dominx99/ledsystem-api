@@ -15,6 +15,7 @@ class CreateCategoriesTable extends Migration
             $table->uuid('id')->primary();
             $table->string('name');
             $table->string('slug');
+            $table->string('icon')->nullable();
             $table->uuid("parent_id")->nullable();
             $table->timestamps();
         });
