@@ -15,7 +15,12 @@ final class Category extends Model
         'parent_id',
     ];
 
-    public function children(): HasMany
+    public function children()
+    {
+        return $this->oneNestedChildren()->with('children');
+    }
+
+    public function oneNestedChildren(): HasMany
     {
         return $this->hasMany(Category::class, 'parent_id', 'id');
     }

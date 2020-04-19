@@ -2,6 +2,7 @@
 
 namespace App\Provider;
 
+use App\Database\Eloquent\Categories\Repositories\EloquentCategoryRepository;
 use App\Database\Eloquent\Repositories\EloquentProductImageRepository;
 use App\Database\Eloquent\Repositories\EloquentProductRepository;
 use Illuminate\Support\ServiceProvider;
@@ -12,6 +13,7 @@ use App\Domain\Products\Repositories\ProductImageRepository;
 use App\Domain\Products\Repositories\ProductImageFileRepository;
 use App\Database\Eloquent\Repositories\EloquentProductImageFileRepository;
 use App\Database\Eloquent\Users\Repositories\EloquentUserRepository;
+use App\Domain\Categories\Repositories\CategoryRepository;
 use App\Domain\Users\Repositories\UserRepository;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -22,5 +24,6 @@ class RepositoryServiceProvider extends ServiceProvider
         ProductImageRepository::class => EloquentProductImageRepository::class,
         ProductImageFileRepository::class => EloquentProductImageFileRepository::class,
         UserRepository::class => EloquentUserRepository::class,
+        CategoryRepository::class => EloquentCategoryRepository::class,
     ];
 }

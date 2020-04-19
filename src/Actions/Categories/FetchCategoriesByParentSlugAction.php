@@ -14,6 +14,6 @@ final class FetchCategoriesByParentSlugAction
             throw new \Exception('Category not found');
         }
 
-        return new JsonResponse($category->children()->get());
+        return new JsonResponse($category->oneNestedChildren()->get());
     }
 }
