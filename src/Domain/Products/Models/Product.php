@@ -10,7 +10,7 @@ use Ramsey\Uuid\Uuid;
 use App\Domain\Products\Events\ProductCreated;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
-use App\Domain\Parameters\Models\ParameterName;
+use App\Domain\Products\Broadcasting\ProductCreated as BroadcastProductCreated;
 
 final class Product extends Model
 {
@@ -41,6 +41,11 @@ final class Product extends Model
         return $this->hasMany(ProductImage::class);
     }
 
+    public function parameters()
+    {
+        return $this->hasMany(ProductParameter::class);
+    }
+
     public static function new(array $data): self
     {
         $productUnitId = (string) Uuid::uuid4();
@@ -57,11 +62,8 @@ final class Product extends Model
             'product_unit_id' => $productUnitId,
         ])));
 
-        return $product;
-    }
+        $product->events->add(new BroadcastProductCreated($data['id']));
 
-    public function parameters()
-    {
-        return $this->hasMany(ProductParameter::class);
+        return $product;
     }
 }

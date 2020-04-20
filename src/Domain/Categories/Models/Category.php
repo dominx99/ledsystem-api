@@ -3,6 +3,7 @@
 namespace App\Domain\Categories\Models;
 
 use App\Database\Eloquent\Model;
+use App\Domain\Parameters\Models\ParameterName;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Domain\Products\Models\Product;
@@ -33,5 +34,10 @@ final class Category extends Model
     public function products(): BelongsToMany
     {
         return $this->belongsToMany(Product::class);
+    }
+
+    public function parameters(): BelongsToMany
+    {
+        return $this->belongsToMany(ParameterName::class);
     }
 }

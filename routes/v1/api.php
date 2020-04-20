@@ -11,6 +11,8 @@ use App\Actions\Products\AssignProductParametersAction;
 use App\Actions\Products\FetchProductsAction;
 use App\Actions\Categories\FetchCategoriesTreeAction;
 use App\Actions\Categories\FindCategoryByIdAction;
+use App\Actions\Products\FindProductByIdAction;
+use App\Actions\Parameters\FetchParametersByCategoryIds;
 
 Route::post('/auth/login', LoginAction::class);
 
@@ -25,3 +27,6 @@ Route::get('/products', FetchProductsAction::class);
 Route::post('/products', CreateProductAction::class);
 Route::post('/products/{productId}/assign-parameters', AssignProductParametersAction::class);
 Route::get('/products/by-slug', FindProductBySlugAction::class);
+Route::get('/products/{productId}', FindProductByIdAction::class);
+
+Route::get('/parameters/by-category-ids', FetchParametersByCategoryIds::class);

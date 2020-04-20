@@ -4,6 +4,8 @@ namespace App\Domain\Shared\Events;
 
 use Illuminate\Events\Dispatcher as EventsDispatcher;
 use Illuminate\Support\Collection;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Support\Facades\Log;
 
 final class Dispatcher extends EventsDispatcher
 {

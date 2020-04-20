@@ -21,7 +21,7 @@ final class EloquentProductRepository implements ProductRepository
     public function findAllByCategorySlug(string $slug): Collection
     {
         if (! $category = Category::where('slug', $slug)->first()) {
-            throw new \Exception("Category not found");
+            throw new BusinessException("Category not found.");
         }
 
         return Product::with(['unit', 'images.original', 'images.thumbnail', 'images.micro'])
@@ -29,6 +29,26 @@ final class EloquentProductRepository implements ProductRepository
             ->where('category_product.category_id', $category->id)
             ->select(['*', 'category_product.id as cp_id', 'products.id as id'])
             ->get();
+    }
+
+    public function findById(string $id): Product
+    {
+        $product = Product::with([
+                'categories',
+                'unit',
+                'parameters.name',
+                'parameters.values',
+                'images.thumbnail',
+                'images.original',
+                'images.micro'
+            ])
+            ->find($id);
+
+        if (! $product) {
+            throw new BusinessException('Product not found.');
+        }
+
+        return $product;
     }
 
     public function findBySlug(string $slug): Product
