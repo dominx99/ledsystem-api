@@ -14,7 +14,9 @@ final class EloquentParameterRepository implements ParameterRepository
             ->whereIn('id', $categoryIds)
             ->get()
             ->pluck('parameters')
-            ->flatten();
+            ->flatten()
+            ->unique('id')
+            ->values();
 
         return $parameters;
     }
