@@ -46,6 +46,11 @@ final class Product extends Model
         return $this->hasMany(ProductParameter::class);
     }
 
+    public function image()
+    {
+        return $this->hasOne(ProductImage::class, 'id', 'product_image_id');
+    }
+
     public static function new(array $data): self
     {
         $productUnitId = (string) Uuid::uuid4();

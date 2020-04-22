@@ -24,7 +24,15 @@ final class EloquentProductRepository implements ProductRepository
             throw new BusinessException("Category not found.");
         }
 
-        return Product::with(['unit', 'images.original', 'images.thumbnail', 'images.micro'])
+        return Product::with([
+                'unit',
+                'images.original',
+                'images.thumbnail',
+                'images.micro',
+                'image.original',
+                'image.thumbnail',
+                'image.micro',
+            ])
             ->join('category_product', 'products.id', '=', 'category_product.product_id')
             ->where('category_product.category_id', $category->id)
             ->select(['*', 'category_product.id as cp_id', 'products.id as id'])
@@ -69,6 +77,21 @@ final class EloquentProductRepository implements ProductRepository
         }
 
         return $product;
+    }
+
+    public function hasImage(string $productId, string $imageId): bool
+    {
+        return DB::table('product_images')
+            ->where('id', $imageId)
+            ->where('product_id', $productId)
+            ->exists();
+    }
+
+    public function updateMainImage(string $productId, string $imageId): void
+    {
+        DB::table('products')
+            ->where('id', $productId)
+            ->update(['product_image_id' => $imageId]);
     }
 
     public function attachParameterValues(string $productId, array $parameterValueIds): void

@@ -15,6 +15,7 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('product_unit_id');
+            $table->uuid('product_image_id')->nullable();
             $table->string('name');
             $table->string('slug');
             $table->string('status')->default(Product::STATUS_NEW);

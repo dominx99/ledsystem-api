@@ -5,4 +5,5 @@ namespace App\Domain\Products\Repositories;
 interface ProductImageRepository
 {
     public function insert(array $images): void;
+    public function exists(string $imageId): bool;
 }

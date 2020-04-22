@@ -13,6 +13,7 @@ use App\Actions\Categories\FetchCategoriesTreeAction;
 use App\Actions\Categories\FindCategoryByIdAction;
 use App\Actions\Products\FindProductByIdAction;
 use App\Actions\Parameters\FetchParametersByCategoryIds;
+use App\Actions\Products\SetProductMainImageAction;
 
 Route::post('/auth/login', LoginAction::class);
 
@@ -26,6 +27,7 @@ Route::get('/categories/{categoryId}', FindCategoryByIdAction::class);
 Route::get('/products', FetchProductsAction::class);
 Route::post('/products', CreateProductAction::class);
 Route::post('/products/{productId}/assign-parameters', AssignProductParametersAction::class);
+Route::post('/products/{productId}/set-main-image', SetProductMainImageAction::class);
 Route::get('/products/by-slug', FindProductBySlugAction::class);
 Route::get('/products/{productId}', FindProductByIdAction::class);
 

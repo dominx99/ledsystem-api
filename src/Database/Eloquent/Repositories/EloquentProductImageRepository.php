@@ -11,4 +11,9 @@ final class EloquentProductImageRepository implements ProductImageRepository
     {
         DB::table('product_images')->insert($images);
     }
+
+    public function exists(string $imageId): bool
+    {
+        return DB::table('product_images')->where('id', $imageId)->exists();
+    }
 }
