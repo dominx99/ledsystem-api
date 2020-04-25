@@ -13,7 +13,15 @@ final class EloquentProductRepository implements ProductRepository
 {
     public function findAll(): Collection
     {
-        return Product::with(['unit', 'images.original', 'images.thumbnail', 'images.micro'])
+        return Product::with([
+                'unit',
+                'images.original',
+                'images.thumbnail',
+                'images.micro',
+                'image.original',
+                'image.thumbnail',
+                'image.micro',
+            ])
             ->orderBy('created_at', 'desc')
             ->get();
     }

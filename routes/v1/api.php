@@ -11,9 +11,11 @@ use App\Actions\Products\AssignProductParametersAction;
 use App\Actions\Products\FetchProductsAction;
 use App\Actions\Categories\FetchCategoriesTreeAction;
 use App\Actions\Categories\FindCategoryByIdAction;
+use App\Actions\Categories\UpdateCategoryParametersAction;
 use App\Actions\Products\FindProductByIdAction;
 use App\Actions\Parameters\FetchParametersByCategoryIds;
 use App\Actions\Products\SetProductMainImageAction;
+use App\Actions\Parameters\FetchAllParametersAction;
 
 Route::post('/auth/login', LoginAction::class);
 
@@ -22,6 +24,7 @@ Route::get('/categories/recursive', FetchCategoriesTreeAction::class);
 Route::get('/categories/parent', FetchCategoriesAction::class);
 Route::get('/categories/by-parent-slug', FetchCategoriesByParentSlugAction::class);
 Route::get('/categories/{categorySlug}/products', FetchProductsByCategory::class);
+Route::post('/categories/{categoryId}/update-parameters', UpdateCategoryParametersAction::class);
 Route::get('/categories/{categoryId}', FindCategoryByIdAction::class);
 
 Route::get('/products', FetchProductsAction::class);
@@ -31,4 +34,5 @@ Route::post('/products/{productId}/set-main-image', SetProductMainImageAction::c
 Route::get('/products/by-slug', FindProductBySlugAction::class);
 Route::get('/products/{productId}', FindProductByIdAction::class);
 
+Route::get('/parameters', FetchAllParametersAction::class);
 Route::get('/parameters/by-category-ids', FetchParametersByCategoryIds::class);

@@ -6,5 +6,6 @@ use Illuminate\Support\Collection;
 
 interface ParameterRepository
 {
+    public function findAll(): Collection;
     public function findAllByCategoryIds(array $categoryIds): Collection;
 }

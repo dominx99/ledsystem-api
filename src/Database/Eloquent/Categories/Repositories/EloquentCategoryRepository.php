@@ -10,7 +10,7 @@ final class EloquentCategoryRepository implements CategoryRepository
 {
     public function findById(string $categoryId): Category
     {
-        if (! $category = Category::find($categoryId)) {
+        if (! $category = Category::with('parameters')->find($categoryId)) {
             throw new BusinessException("Category not found.");
         }
 
