@@ -2,10 +2,10 @@
 
 namespace App\Actions\Categories;
 
-use App\Domain\Categories\Repositories\CategoryRepository;
 use Illuminate\Http\JsonResponse;
+use App\Domain\Categories\Repositories\CategoryRepository;
 
-final class FetchCategoriesAction
+final class FetchParentCategoriesAction
 {
     private CategoryRepository $categories;
 
@@ -17,7 +17,7 @@ final class FetchCategoriesAction
     public function __invoke(): JsonResponse
     {
         return new JsonResponse(
-            $this->categories->findAll(),
+            $this->categories->findAllParent(),
         );
     }
 }

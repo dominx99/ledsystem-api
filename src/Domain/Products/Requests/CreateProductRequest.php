@@ -14,7 +14,7 @@ class CreateProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'       => 'required',
+            'name'       => 'required|min:3',
             'slug'       => 'required',
             'type'       => 'required',
             'price'      => 'required|integer',
