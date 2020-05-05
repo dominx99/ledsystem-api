@@ -8,11 +8,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use App\Domain\Products\Models\Product;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Ramsey\Uuid\Uuid;
+use App\Domain\Categories\Broadcasting\CategoryCreated;
 
 final class Category extends Model
 {
     protected $fillable = [
+        'id',
         'name',
+        'slug',
         'parent_id',
     ];
 
@@ -39,5 +43,21 @@ final class Category extends Model
     public function parameters(): BelongsToMany
     {
         return $this->belongsToMany(ParameterName::class);
+    }
+
+    public static function new(array $data): self
+    {
+        $categoryId = (string) Uuid::uuid4();
+
+        $category = new static([
+            'id'              => $categoryId,
+            'name'            => $data['name'],
+            'slug'            => $data['slug'],
+            'parent_id'       => $data['parent_id'],
+        ]);
+
+        $category->events->add(new CategoryCreated($categoryId));
+
+        return $category;
     }
 }

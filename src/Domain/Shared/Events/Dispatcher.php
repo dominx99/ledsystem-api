@@ -2,12 +2,10 @@
 
 namespace App\Domain\Shared\Events;
 
-use Illuminate\Events\Dispatcher as EventsDispatcher;
 use Illuminate\Support\Collection;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-use Illuminate\Support\Facades\Log;
+use App\Domain\Shared\Contracts\EventDispatcher;
 
-final class Dispatcher extends EventsDispatcher
+final class Dispatcher implements EventDispatcher
 {
     public function dispatchAll(Collection $events): void
     {

@@ -18,6 +18,7 @@ use App\Actions\Parameters\FetchParametersByCategoryIds;
 use App\Actions\Products\SetProductMainImageAction;
 use App\Actions\Parameters\FetchAllParametersAction;
 use App\Actions\Categories\UpdateCategoryAction;
+use App\Actions\Categories\CreateCategoryAction;
 
 Route::post('/auth/login', LoginAction::class);
 
@@ -29,6 +30,7 @@ Route::get('/categories/{categorySlug}/products', FetchProductsByCategory::class
 Route::post('/categories/{categoryId}/update-parameters', UpdateCategoryParametersAction::class);
 Route::get('/categories/{categoryId}', FindCategoryByIdAction::class);
 Route::put('/categories/{categoryId}', UpdateCategoryAction::class);
+Route::post('/categories', CreateCategoryAction::class);
 
 Route::get('/products', FetchProductsAction::class);
 Route::post('/products', CreateProductAction::class);
