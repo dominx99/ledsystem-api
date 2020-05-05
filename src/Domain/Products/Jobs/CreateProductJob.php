@@ -9,7 +9,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\Domain\Products\Models\Product;
 use App\Domain\Products\Repositories\ProductRepository;
-use Illuminate\Contracts\Events\Dispatcher;
+use App\Domain\Shared\Contracts\EventDispatcher;
 
 class CreateProductJob implements ShouldQueue
 {
@@ -28,7 +28,7 @@ class CreateProductJob implements ShouldQueue
     /**
      * @return void
      */
-    public function handle(ProductRepository $products, Dispatcher $events)
+    public function handle(ProductRepository $products, EventDispatcher $events)
     {
         $product = Product::new($this->data);
 
