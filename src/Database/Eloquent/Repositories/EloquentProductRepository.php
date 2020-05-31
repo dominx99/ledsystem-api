@@ -70,9 +70,10 @@ final class EloquentProductRepository implements ProductRepository
     public function findBySlug(string $slug): Product
     {
         $product = Product::with([
+                'categories',
+                'unit',
                 'parameters.name',
                 'parameters.values',
-                'unit',
                 'images.thumbnail',
                 'images.original',
                 'images.micro'
